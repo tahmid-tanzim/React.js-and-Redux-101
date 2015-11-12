@@ -20443,13 +20443,15 @@
 	    getInitialState: function getInitialState() {
 	        console.log("APP Initial State");
 	        return {
-	            status: 'disconnected'
+	            status: 'disconnected',
+	            title: ''
 	        };
 	    },
 	    componentWillMount: function componentWillMount() {
 	        this.socket = io('http://localhost:3000');
 	        this.socket.on('connect', this.connect);
 	        this.socket.on('disconnect', this.disconnect);
+	        this.socket.on('welcome', this.welcome);
 	    },
 	    connect: function connect() {
 	        console.log("Socket Connected from Client side -> Id: %s", this.socket.id);
@@ -20459,6 +20461,9 @@
 	        console.log("Socket Disconnected from Client side");
 	        this.setState({ status: 'disconnected' });
 	    },
+	    welcome: function welcome(serverState) {
+	        this.setState({ title: serverState.title });
+	    },
 	    /**
 	     * Note: ES6 shorten pattern `render: function(){}` into `render()`
 	     * */
@@ -20466,7 +20471,7 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(Header, { itle: 'My Header', status: this.state.status })
+	            React.createElement(Header, { title: this.state.title, status: this.state.status })
 	        );
 	    }
 	});

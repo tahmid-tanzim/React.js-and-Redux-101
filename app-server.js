@@ -5,7 +5,7 @@ var app = express();
  * Store all socket connections
  * */
 var connections = [];
-
+var title = 'Untitled Presentation';
 
 /**
  * Note: Middleware app.use will serve everything static from public directory and bootstrap.
@@ -22,6 +22,10 @@ io.sockets.on('connection', function (socket) {
         connections.splice(connections.indexOf(socket), 1);
         socket.disconnect();
         console.log("Socket Disconnected -> %s sockets remaining", connections.length);
+    });
+
+    socket.emit('welcome', {
+        title: title
     });
 
     connections.push(socket);
