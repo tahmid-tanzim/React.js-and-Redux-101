@@ -1,5 +1,5 @@
-var express = require('express'),
-    app = express();
+var express = require('express');
+var app = express();
 
 /**
  * Note: Middleware app.use will serve everything static from public directory and bootstrap.
