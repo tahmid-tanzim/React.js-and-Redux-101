@@ -50,11 +50,13 @@
 	var Router = __webpack_require__(157);
 	var Route = Router.Route;
 	var DefaultRoute = Router.DefaultRoute;
+	var NotFoundRouter = Router.NotFoundRoute;
 
 	var APP = __webpack_require__(199);
 	var Audience = __webpack_require__(251);
 	var Speaker = __webpack_require__(252);
 	var Board = __webpack_require__(253);
+	var Whoops404 = __webpack_require__(254);
 
 	var routes = React.createElement(
 	    Route,
@@ -62,7 +64,8 @@
 	    React.createElement(DefaultRoute, { handler: Audience }),
 	    React.createElement(Route, { name: 'audience', path: 'audience', handler: Audience }),
 	    React.createElement(Route, { name: 'speaker', path: 'speaker', handler: Speaker }),
-	    React.createElement(Route, { name: 'board', path: 'board', handler: Board })
+	    React.createElement(Route, { name: 'board', path: 'board', handler: Board }),
+	    React.createElement(NotFoundRouter, { handler: Whoops404 })
 	);
 
 	Router.run(routes, function (Handler) {
@@ -31041,6 +31044,54 @@
 	});
 
 	module.exports = Board;
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+	var Router = __webpack_require__(157);
+	var Link = Router.Link;
+
+	var Whoops404 = React.createClass({
+	    displayName: 'Whoops404',
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { id: 'not-found' },
+	            React.createElement(
+	                'h2',
+	                null,
+	                'Whoops...'
+	            ),
+	            React.createElement(
+	                'p',
+	                null,
+	                'Sorry! The page is not available. Are you looking for:'
+	            ),
+	            React.createElement(
+	                Link,
+	                { to: '/' },
+	                'Join as Audience'
+	            ),
+	            React.createElement(
+	                Link,
+	                { to: '/speaker' },
+	                'Start the Presentation'
+	            ),
+	            React.createElement(
+	                Link,
+	                { to: '/board' },
+	                'View the Board'
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Whoops404;
 
 /***/ }
 /******/ ]);

@@ -16,7 +16,7 @@ npm install babel-loader
 ```
 npm install --save socket.io socket.io-client
 ```
-### 4. Incorporating [React Router](https://github.com/rackt/react-router)
+### 4. Setting up the [React Router](https://github.com/rackt/react-router)
 ```
 npm install --save react-router
 ```

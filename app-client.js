@@ -2,11 +2,13 @@ var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
+var NotFoundRouter = Router.NotFoundRoute;
 
 var APP = require('./components/APP');
 var Audience = require('./components/Audience');
 var Speaker = require('./components/Speaker');
 var Board = require('./components/Board');
+var Whoops404 = require('./components/Whoops404');
 
 var routes = (
     <Route handler={APP}>
@@ -14,6 +16,7 @@ var routes = (
         <Route name="audience" path="audience" handler={Audience}></Route>
         <Route name="speaker" path="speaker" handler={Speaker}></Route>
         <Route name="board" path="board" handler={Board}></Route>
+        <NotFoundRouter handler={Whoops404} />
     </Route>
 );
 
