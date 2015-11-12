@@ -44,8 +44,7 @@ form a {
     padding-left: 20px;
 }
 
-
-#questions>div>span {
+#questions > div > span {
     padding: .5em;
     margin: .5em;
     display: block;
@@ -53,7 +52,7 @@ form a {
     border: 2px solid green;
 }
 
-#questions>div>span:hover {
+#questions > div > span:hover {
     background-color: yellow;
 }
 
