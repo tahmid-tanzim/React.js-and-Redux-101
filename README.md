@@ -12,6 +12,10 @@ npm install react
 sudo npm install -g webpack
 npm install babel-loader
 ```
+### 3. Incorporating [Socket IO](https://github.com/socketio/socket.io)
+```
+npm install --save socket.io socket.io-client
+```
 ### Run Server
 ```
 npm start
