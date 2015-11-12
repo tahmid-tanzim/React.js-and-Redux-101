@@ -9,7 +9,8 @@ var APP = React.createClass({
         console.log("APP Initial State");
         return {
             status: 'disconnected',
-            title: ''
+            title: '',
+            dance: 'Yep!!'
         }
     },
     componentWillMount() {
@@ -35,8 +36,8 @@ var APP = React.createClass({
      render() {
         return (
             <div>
-                <Header title={this.state.title} status={this.state.status}/>
-                <RouteHandler/>
+                <Header title={this.state.title} status={this.state.status} />
+                <RouteHandler {...this.state} />
             </div>
         );
     }

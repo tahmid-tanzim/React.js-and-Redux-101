@@ -23704,7 +23704,8 @@
 	        console.log("APP Initial State");
 	        return {
 	            status: 'disconnected',
-	            title: ''
+	            title: '',
+	            dance: 'Yep!!'
 	        };
 	    },
 	    componentWillMount: function componentWillMount() {
@@ -23732,7 +23733,7 @@
 	            'div',
 	            null,
 	            React.createElement(Header, { title: this.state.title, status: this.state.status }),
-	            React.createElement(RouteHandler, null)
+	            React.createElement(RouteHandler, this.state)
 	        );
 	    }
 	});
@@ -30987,7 +30988,8 @@
 	        return React.createElement(
 	            'h1',
 	            null,
-	            'Audience'
+	            'Audience: ',
+	            this.props.title
 	        );
 	    }
 	});
@@ -31009,7 +31011,8 @@
 	        return React.createElement(
 	            'h1',
 	            null,
-	            'Speaker'
+	            'Speaker: ',
+	            this.props.title
 	        );
 	    }
 	});
@@ -31031,7 +31034,8 @@
 	        return React.createElement(
 	            'h1',
 	            null,
-	            'Board'
+	            'Board: ',
+	            this.props.dance
 	        );
 	    }
 	});
