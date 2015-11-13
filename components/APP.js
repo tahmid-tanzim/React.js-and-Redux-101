@@ -14,10 +14,22 @@ var APP = React.createClass({
         }
     },
     componentWillMount() {
+        /**
+         * Init Socket IO
+         * */
         this.socket = io('http://localhost:3000');
+        /**
+         * Listening emit events from `app-server.js`
+         * */
         this.socket.on('connect', this.connect);
         this.socket.on('disconnect', this.disconnect);
         this.socket.on('welcome', this.welcome);
+    },
+    emit(eventName, payload) {
+        /**
+         * Sending emit event to `app-server.js`
+         * */
+        this.socket.emit(eventName, payload);
     },
     connect() {
         console.log("Socket Connected from Client side -> Id: %s", this.socket.id);
@@ -37,7 +49,7 @@ var APP = React.createClass({
         return (
             <div>
                 <Header title={this.state.title} status={this.state.status} />
-                <RouteHandler {...this.state} />
+                <RouteHandler emit={this.emit} {...this.state} />
             </div>
         );
     }

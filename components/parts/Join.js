@@ -3,7 +3,12 @@ var React = require('react');
 var Join = React.createClass({
     join() {
         var memberName = React.findDOMNode(this.refs.name).value;
-        alert("TODO: Join Member " + memberName);
+        console.log("TODO: Join Member " + memberName);
+        /**
+         * 1. Sending memberName to server by emitting `join` event.
+         * 2. `this.props.emit` is actually invoking `emit` function from `./components/APP.js`
+         * */
+        this.props.emit('join', {name: memberName});
     },
     render() {
         return (

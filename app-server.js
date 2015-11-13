@@ -24,6 +24,16 @@ io.sockets.on('connection', function (socket) {
         console.log("Socket Disconnected -> %s sockets remaining", connections.length);
     });
 
+    /**
+     * Note: Listening event `join` through socket.io from `./components/APP.js`
+     * */
+    socket.on('join', function(payload) {
+        console.log("Audience Joined: %s", payload.name);
+    });
+
+    /**
+     * Note: Sending emit event `welcome` through socket.io to `./components/APP.js`
+     * */
     socket.emit('welcome', {
         title: title
     });
