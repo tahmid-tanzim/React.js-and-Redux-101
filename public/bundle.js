@@ -23710,9 +23710,11 @@
 	        return {
 	            status: 'disconnected',
 	            title: '',
-	            member: {}, // Both Speaker and Audience is a member
+	            /* Both Speaker and Audience is a member */
+	            member: {},
 	            audience: [],
-	            speaker: {} // Speaker information
+	            /* Speaker's Information */
+	            speaker: ''
 	        };
 	    },
 	    componentWillMount: function componentWillMount() {
@@ -23726,9 +23728,10 @@
 	         * */
 	        this.socket.on('connect', this.connect);
 	        this.socket.on('disconnect', this.disconnect);
-	        this.socket.on('welcome', this.welcome);
+	        this.socket.on('welcome', this.updateState);
 	        this.socket.on('joined', this.joined);
 	        this.socket.on('audience', this.updateAudience);
+	        this.socket.on('start', this.updateState);
 	    },
 	    emit: function emit(eventName, payload) {
 	        /**
@@ -23753,8 +23756,8 @@
 	        console.log("Socket Disconnected from Client side");
 	        this.setState({ status: 'disconnected' });
 	    },
-	    welcome: function welcome(serverState) {
-	        this.setState({ title: serverState.title });
+	    updateState: function updateState(serverState) {
+	        this.setState(serverState);
 	    },
 	    joined: function joined(member) {
 	        /**
@@ -23778,7 +23781,7 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(Header, { title: this.state.title, status: this.state.status }),
+	            React.createElement(Header, this.state),
 	            React.createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
 	        );
 	    }
@@ -31006,6 +31009,11 @@
 	                    'h1',
 	                    null,
 	                    this.props.title
+	                ),
+	                React.createElement(
+	                    'p',
+	                    null,
+	                    this.props.speaker
 	                )
 	            ),
 	            React.createElement(
@@ -31210,46 +31218,47 @@
 /* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var JoinSpeaker = React.createClass({
-	    displayName: 'JoinSpeaker',
+	    displayName: "JoinSpeaker",
 
 	    start: function start() {
 	        var speaker = {
 	            name: React.findDOMNode(this.refs.name).value,
 	            title: React.findDOMNode(this.refs.title).value
 	        };
+	        console.log("TODO: Speaker: " + speaker.name + " | " + speaker.title);
 	        this.props.emit('start', speaker);
 	    },
 	    render: function render() {
 	        return React.createElement(
-	            'form',
-	            { action: 'javascript:void(0)', onSubmit: this.start },
+	            "form",
+	            { action: "javascript:void(0)", onSubmit: this.start },
 	            React.createElement(
-	                'label',
+	                "label",
 	                null,
-	                'Full Name'
+	                "Full Name"
 	            ),
-	            React.createElement('input', { ref: 'name',
-	                className: 'form-control',
-	                placeholder: 'enter your full name',
+	            React.createElement("input", { ref: "name",
+	                className: "form-control",
+	                placeholder: "enter your full name",
 	                required: true }),
 	            React.createElement(
-	                'label',
+	                "label",
 	                null,
-	                'Presentation Title'
+	                "Presentation Title"
 	            ),
-	            React.createElement('input', { ref: 'title',
-	                className: 'form-control',
-	                placeholder: 'enter a title for this presentation',
+	            React.createElement("input", { ref: "title",
+	                className: "form-control",
+	                placeholder: "enter a title for this presentation",
 	                required: true }),
 	            React.createElement(
-	                'button',
-	                { className: 'btn btn-primary' },
-	                'Join'
+	                "button",
+	                { className: "btn btn-primary" },
+	                "Join"
 	            )
 	        );
 	    }

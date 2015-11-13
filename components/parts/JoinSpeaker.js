@@ -6,6 +6,7 @@ var JoinSpeaker = React.createClass({
             name: React.findDOMNode(this.refs.name).value,
             title: React.findDOMNode(this.refs.title).value
         };
+        console.log("TODO: Speaker: " + speaker.name + " | " + speaker.title);
         this.props.emit('start', speaker);
     },
     render() {

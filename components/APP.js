@@ -14,7 +14,7 @@ var APP = React.createClass({
             member: {},
             audience: [],
             /* Speaker's Information */
-            speaker: {}
+            speaker: ''
         }
     },
     componentWillMount() {
@@ -28,9 +28,10 @@ var APP = React.createClass({
          * */
         this.socket.on('connect', this.connect);
         this.socket.on('disconnect', this.disconnect);
-        this.socket.on('welcome', this.welcome);
+        this.socket.on('welcome', this.updateState);
         this.socket.on('joined', this.joined);
         this.socket.on('audience', this.updateAudience);
+        this.socket.on('start', this.updateState);
     },
     emit(eventName, payload) {
         /**
@@ -55,8 +56,8 @@ var APP = React.createClass({
         console.log("Socket Disconnected from Client side");
         this.setState({status: 'disconnected'});
     },
-    welcome(serverState) {
-        this.setState({title: serverState.title});
+    updateState(serverState) {
+        this.setState(serverState);
     },
     joined(member) {
         /**
@@ -79,7 +80,7 @@ var APP = React.createClass({
         render() {
         return (
             <div>
-                <Header title={this.state.title} status={this.state.status}/>
+                <Header {...this.state} />
                 <RouteHandler emit={this.emit} {...this.state} />
             </div>
         );

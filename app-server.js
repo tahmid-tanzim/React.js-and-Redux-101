@@ -6,6 +6,8 @@ var app = express();
  * Store all socket connections
  * */
 var connections = [];
+
+/* Server state data. */
 var title = 'Untitled Presentation';
 var audience = [];
 var speaker = {};
@@ -75,10 +77,12 @@ io.sockets.on('connection', function (socket) {
         speaker = {
             id: this.id,
             name: payload.name,
+            title: payload.title,
             type: 'speaker'
         };
 
         this.emit('joined', speaker);
+        io.sockets.emit('start', {title: speaker.title, speaker: speaker.name});
         console.log("Presentation started: '%s' by %s", title, speaker.name);
     });
 
@@ -86,7 +90,9 @@ io.sockets.on('connection', function (socket) {
      * Note: Sending emit event `welcome` through socket.io to `./components/APP.js`
      * */
     socket.emit('welcome', {
-        title: title
+        title: title,
+        audience: audience,
+        speaker: speaker.name
     });
 
     connections.push(socket);
