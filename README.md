@@ -20,6 +20,10 @@ npm install --save socket.io socket.io-client
 ```
 npm install --save react-router
 ```
+### 5. Installing [Underscore.js](http://underscorejs.org/)
+```
+npm install --save underscore
+```
 ### Run Server
 ```
 npm start
