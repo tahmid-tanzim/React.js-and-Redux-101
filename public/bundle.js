@@ -23735,6 +23735,16 @@
 	        this.socket.emit(eventName, payload);
 	    },
 	    connect: function connect() {
+	        var member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null;
+
+	        /**
+	         * Note: If member already exists in browser sessionStorage,
+	         * Then Re-join the same member after disconnect or refresh from browser.
+	         * */
+	        if (member) {
+	            this.emit('join', member);
+	        }
+
 	        console.log("Socket Connected from Client side -> Id: %s", this.socket.id);
 	        this.setState({ status: 'connected' });
 	    },
@@ -23746,6 +23756,7 @@
 	        this.setState({ title: serverState.title });
 	    },
 	    joined: function joined(member) {
+	        sessionStorage.member = JSON.stringify(member);
 	        this.setState({ member: member });
 	    },
 	    updateAudience: function updateAudience(newAudience) {

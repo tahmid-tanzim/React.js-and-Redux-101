@@ -35,6 +35,16 @@ var APP = React.createClass({
         this.socket.emit(eventName, payload);
     },
     connect() {
+        var member = (sessionStorage.member) ? JSON.parse(sessionStorage.member) : null;
+
+        /**
+         * Note: If member already exists in browser sessionStorage,
+         * Then Re-join the same member after disconnect or refresh from browser.
+         * */
+        if(member) {
+            this.emit('join', member);
+        }
+
         console.log("Socket Connected from Client side -> Id: %s", this.socket.id);
         this.setState({status: 'connected'});
     },
@@ -46,6 +56,7 @@ var APP = React.createClass({
         this.setState({title: serverState.title});
     },
     joined(member) {
+        sessionStorage.member = JSON.stringify(member);
         this.setState({member: member});
     },
     updateAudience(newAudience) {
