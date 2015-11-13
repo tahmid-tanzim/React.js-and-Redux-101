@@ -25,9 +25,15 @@ io.sockets.on('connection', function (socket) {
     });
 
     /**
-     * Note: Listening event `join` through socket.io from `./components/APP.js`
+     * Note: Listening emit event `join` through socket.io from `./components/APP.js`
      * */
     socket.on('join', function(payload) {
+        /* Here `this` is the socket object. */
+        var newMember = {
+            id: this.id,
+            name: payload.name
+        };
+        this.emit('joined', newMember);
         console.log("Audience Joined: %s", payload.name);
     });
 

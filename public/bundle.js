@@ -23710,7 +23710,7 @@
 	        return {
 	            status: 'disconnected',
 	            title: '',
-	            dance: 'Yep!!'
+	            member: {}
 	        };
 	    },
 	    componentWillMount: function componentWillMount() {
@@ -23724,6 +23724,7 @@
 	        this.socket.on('connect', this.connect);
 	        this.socket.on('disconnect', this.disconnect);
 	        this.socket.on('welcome', this.welcome);
+	        this.socket.on('joined', this.joined);
 	    },
 	    emit: function emit(eventName, payload) {
 	        /**
@@ -23741,6 +23742,9 @@
 	    },
 	    welcome: function welcome(serverState) {
 	        this.setState({ title: serverState.title });
+	    },
+	    joined: function joined(member) {
+	        this.setState({ member: member });
 	    },
 	    /**
 	     * Note: ES6 shorten pattern `render: function(){}` into `render()`
@@ -31010,11 +31014,35 @@
 	                Display,
 	                { 'if': this.props.status === 'connected' },
 	                React.createElement(
-	                    'h1',
-	                    null,
-	                    'Join the session'
+	                    Display,
+	                    { 'if': this.props.member.name },
+	                    React.createElement(
+	                        'h2',
+	                        null,
+	                        'Welcome ',
+	                        this.props.member.name
+	                    ),
+	                    React.createElement(
+	                        'h2',
+	                        null,
+	                        this.props.member.id
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'Questions will appear here.'
+	                    )
 	                ),
-	                React.createElement(Join, { emit: this.props.emit })
+	                React.createElement(
+	                    Display,
+	                    { 'if': !this.props.member.name },
+	                    React.createElement(
+	                        'h2',
+	                        null,
+	                        'Join the session'
+	                    ),
+	                    React.createElement(Join, { emit: this.props.emit })
+	                )
 	            )
 	        );
 	    }
