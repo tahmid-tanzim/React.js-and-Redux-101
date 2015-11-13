@@ -54,9 +54,9 @@
 
 	var APP = __webpack_require__(199);
 	var Audience = __webpack_require__(251);
-	var Speaker = __webpack_require__(253);
-	var Board = __webpack_require__(254);
-	var Whoops404 = __webpack_require__(255);
+	var Speaker = __webpack_require__(254);
+	var Board = __webpack_require__(255);
+	var Whoops404 = __webpack_require__(256);
 
 	var routes = React.createElement(
 	    Route,
@@ -30984,7 +30984,7 @@
 
 	var React = __webpack_require__(1);
 	var Display = __webpack_require__(252);
-
+	var Join = __webpack_require__(253);
 	var Audience = React.createClass({
 	    displayName: 'Audience',
 
@@ -30999,7 +30999,8 @@
 	                    'h1',
 	                    null,
 	                    'Join the session'
-	                )
+	                ),
+	                React.createElement(Join, null)
 	            )
 	        );
 	    }
@@ -31033,6 +31034,45 @@
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Join = React.createClass({
+	    displayName: "Join",
+
+	    join: function join() {
+	        var memberName = React.findDOMNode(this.refs.name).value;
+	        alert("TODO: Join Member " + memberName);
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            "form",
+	            { action: "javascript:void(0)", onSubmit: this.join },
+	            React.createElement(
+	                "label",
+	                null,
+	                "Full Name"
+	            ),
+	            React.createElement("input", { ref: "name",
+	                className: "form-control",
+	                placeholder: "enter your full name",
+	                required: true }),
+	            React.createElement(
+	                "button",
+	                { className: "btn btn-primary" },
+	                "Join"
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Join;
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	var React = __webpack_require__(1);
@@ -31053,7 +31093,7 @@
 	module.exports = Speaker;
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31076,7 +31116,7 @@
 	module.exports = Board;
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
