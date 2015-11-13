@@ -1,14 +1,17 @@
 var React = require('react');
+var Link = require('react-router').Link;
 
 var Join = React.createClass({
     join() {
-        var memberName = React.findDOMNode(this.refs.name).value;
-        console.log("TODO: Join Member " + memberName);
+        var member = {
+            name: React.findDOMNode(this.refs.name).value
+        };
+        console.log("TODO: Join Member " + member.name);
         /**
          * 1. Sending memberName to server by emitting `join` event.
          * 2. `this.props.emit` is actually invoking `emit` function from `./components/APP.js`
          * */
-        this.props.emit('join', {name: memberName});
+        this.props.emit('join', member);
     },
     render() {
         return (
@@ -19,6 +22,7 @@ var Join = React.createClass({
                        placeholder="enter your full name"
                        required/>
                 <button className="btn btn-primary">Join</button>
+                <Link to="/speaker">Join as speaker</Link>
             </form>
         );
     }
