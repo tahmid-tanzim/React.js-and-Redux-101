@@ -23710,7 +23710,8 @@
 	        return {
 	            status: 'disconnected',
 	            title: '',
-	            member: {}
+	            member: {},
+	            audience: []
 	        };
 	    },
 	    componentWillMount: function componentWillMount() {
@@ -23725,6 +23726,7 @@
 	        this.socket.on('disconnect', this.disconnect);
 	        this.socket.on('welcome', this.welcome);
 	        this.socket.on('joined', this.joined);
+	        this.socket.on('audience', this.updateAudience);
 	    },
 	    emit: function emit(eventName, payload) {
 	        /**
@@ -23745,6 +23747,9 @@
 	    },
 	    joined: function joined(member) {
 	        this.setState({ member: member });
+	    },
+	    updateAudience: function updateAudience(newAudience) {
+	        this.setState({ audience: newAudience });
 	    },
 	    /**
 	     * Note: ES6 shorten pattern `render: function(){}` into `render()`
@@ -31023,9 +31028,10 @@
 	                        this.props.member.name
 	                    ),
 	                    React.createElement(
-	                        'h2',
+	                        'p',
 	                        null,
-	                        this.props.member.id
+	                        this.props.audience.length,
+	                        ' audience members connected.'
 	                    ),
 	                    React.createElement(
 	                        'p',

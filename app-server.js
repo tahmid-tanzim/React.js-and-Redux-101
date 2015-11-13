@@ -6,6 +6,7 @@ var app = express();
  * */
 var connections = [];
 var title = 'Untitled Presentation';
+var audience = [];
 
 /**
  * Note: Middleware app.use will serve everything static from public directory and bootstrap.
@@ -28,12 +29,23 @@ io.sockets.on('connection', function (socket) {
      * Note: Listening emit event `join` through socket.io from `./components/APP.js`
      * */
     socket.on('join', function(payload) {
+
         /* Here `this` is the socket object. */
         var newMember = {
             id: this.id,
             name: payload.name
         };
+
+        /**
+         * Note: Sending `newMember` object to Audience component
+         * */
         this.emit('joined', newMember);
+
+        /**
+         * Note: Broadcasting `newMember` or Audience array to everyone.
+         * */
+        audience.push(newMember);
+        io.sockets.emit('audience', audience);
         console.log("Audience Joined: %s", payload.name);
     });
 
