@@ -11,13 +11,13 @@ import Speaker from './components/Speaker'
 import Board from './components/Board'
 import Whoops404 from './components/Whoops404'
 
-//var Route = Router.Route;
-//var DefaultRoute = Router.DefaultRoute;
-//var NotFoundRouter = Router.NotFoundRoute;
+var Route = Router.Route;
+var DefaultRoute = Router.DefaultRoute;
+var NotFoundRouter = Router.NotFoundRoute;
 /**
  * Note: ES6 De-structuring assignment above comment out components.
  * */
-var {Route, DefaultRoute, NotFoundRouter} = Router;
+//var { Route, DefaultRoute, NotFoundRouter } = Router;
 
 var routes = (
     <Route handler={APP}>
