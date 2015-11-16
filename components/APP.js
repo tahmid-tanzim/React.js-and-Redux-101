@@ -16,7 +16,8 @@ var APP = React.createClass({
             /* Speaker's Information */
             speaker: '',
             questions: [],
-            currentQuestion: false
+            currentQuestion: false,
+            results: {}
         }
     },
     componentWillMount() {
@@ -36,6 +37,7 @@ var APP = React.createClass({
         this.socket.on('start', this.start);
         this.socket.on('end', this.updateState);
         this.socket.on('ask', this.ask);
+        this.socket.on('results', this.updateResults);
     },
     emit(eventName, payload) {
         /**
@@ -100,6 +102,9 @@ var APP = React.createClass({
          * */
         sessionStorage.answer = '';
         this.setState({currentQuestion: question});
+    },
+    updateResults(data) {
+        this.setState({results: data});
     },
     /**
      * Note: ES6 shorten pattern `render: function(){}` into `render(){}`
