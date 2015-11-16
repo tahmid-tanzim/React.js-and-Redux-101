@@ -8,8 +8,13 @@ var Audience = React.createClass({
                 <Display if={this.props.status === 'connected'}>
                     <Display if={this.props.member.name}>
                         <h2>Welcome {this.props.member.name}</h2>
-                        <p>{this.props.audience.length} audience members connected.</p>
-                        <p>Questions will appear here.</p>
+                        <Display if={!this.props.currentQuestion}>
+                            <p>{this.props.audience.length} audience members connected.</p>
+                            <p>Questions will appear here.</p>
+                        </Display>
+                        <Display if={this.props.currentQuestion}>
+                            <h3>{this.props.currentQuestion.q}</h3>
+                        </Display>
                     </Display>
                     <Display if={!this.props.member.name}>
                         <h2>Join the session</h2>

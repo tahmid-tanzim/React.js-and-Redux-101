@@ -7,13 +7,12 @@ var app = express();
  * */
 var connections = [];
 
-/* Server state data. */
+/* Server state variable data. */
 var title = 'Untitled Presentation';
 var audience = [];
 var speaker = {};
 var questions = require('./app-questions');
-
-
+var currentQuestion = false;
 
 /**
  * Note: Middleware app.use will serve everything static from public directory and bootstrap.
@@ -95,13 +94,24 @@ io.sockets.on('connection', function (socket) {
     });
 
     /**
+     * Note: Listen Speaker ask a question,
+     * */
+    socket.on('ask', function (question) {
+        currentQuestion = question;
+
+        io.sockets.emit('ask', currentQuestion);
+        console.log("Question Asked: '%s' by %s", question.q, speaker.name);
+    });
+
+    /**
      * Note: Sending emit event `welcome` through socket.io to `./components/APP.js`
      * */
     socket.emit('welcome', {
         title: title,
         audience: audience,
         speaker: speaker.name,
-        questions: questions
+        questions: questions,
+        currentQuestion: currentQuestion
     });
 
     connections.push(socket);
