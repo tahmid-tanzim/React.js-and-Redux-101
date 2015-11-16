@@ -14,7 +14,8 @@ var APP = React.createClass({
             member: {},
             audience: [],
             /* Speaker's Information */
-            speaker: ''
+            speaker: '',
+            questions: []
         }
     },
     componentWillMount() {

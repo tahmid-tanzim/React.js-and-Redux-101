@@ -11,6 +11,9 @@ var connections = [];
 var title = 'Untitled Presentation';
 var audience = [];
 var speaker = {};
+var questions = require('./app-questions');
+
+
 
 /**
  * Note: Middleware app.use will serve everything static from public directory and bootstrap.
@@ -97,7 +100,8 @@ io.sockets.on('connection', function (socket) {
     socket.emit('welcome', {
         title: title,
         audience: audience,
-        speaker: speaker.name
+        speaker: speaker.name,
+        questions: questions
     });
 
     connections.push(socket);
