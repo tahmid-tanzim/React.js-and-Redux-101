@@ -1,6 +1,8 @@
 var React = require('react');
 var Display = require('./parts/Display');
 var Join = require('./parts/Join');
+var Ask = require('./parts/Ask');
+
 var Audience = React.createClass({
     render() {
         return (
@@ -13,7 +15,7 @@ var Audience = React.createClass({
                             <p>Questions will appear here.</p>
                         </Display>
                         <Display if={this.props.currentQuestion}>
-                            <h3>{this.props.currentQuestion.q}</h3>
+                            <Ask question={this.props.currentQuestion} />
                         </Display>
                     </Display>
                     <Display if={!this.props.member.name}>
