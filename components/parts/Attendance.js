@@ -1,31 +1,40 @@
 var React = require('react');
-var Link = require('react-router').Link;
+var Display = require('./Display');
 
-var Join = React.createClass({
-    join() {
-        var member = {
-            name: React.findDOMNode(this.refs.name).value
-        };
-        console.log("TODO: Join Member " + member.name);
-        /**
-         * 1. Sending memberName to server by emitting `join` event.
-         * 2. `this.props.emit` is actually invoking `emit` function from `./components/APP.js`
-         * */
-        this.props.emit('join', member);
+var Attendance = React.createClass({
+    addMemberRow(member, i) {
+        return(
+            <tr key={i}>
+                <td>{member.name}</td>
+                <td>{member.id}</td>
+            </tr>
+        );
     },
     render() {
         return (
-            <form action="javascript:void(0)" onSubmit={this.join}>
-                <label>Full Name</label>
-                <input ref="name"
-                       className="form-control"
-                       placeholder="enter your full name"
-                       required/>
-                <button className="btn btn-primary">Join</button>
-                <Link to="/speaker">Join as speaker</Link>
-            </form>
+            <div>
+                <Display if={this.props.audience.length > 0}>
+                <h2>Attendance - {this.props.audience.length} members</h2>
+                    <table className="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Audience Member</th>
+                                <th>Socket ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.props.audience.map(this.addMemberRow)}
+                        </tbody>
+                    </table>
+                </Display>
+                <Display if={this.props.audience.length == 0}>
+                    <div className="alert alert-danger" role="alert">
+                        <strong>Sorry!</strong> We don't have any Attendance.
+                    </div>
+                </Display>
+            </div>
         );
     }
 });
 
-module.exports = Join;
+module.exports = Attendance;
