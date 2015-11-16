@@ -31,7 +31,8 @@ var APP = React.createClass({
         this.socket.on('welcome', this.updateState);
         this.socket.on('joined', this.joined);
         this.socket.on('audience', this.updateAudience);
-        this.socket.on('start', this.updateState);
+        this.socket.on('start', this.start);
+        this.socket.on('end', this.updateState);
     },
     emit(eventName, payload) {
         /**
@@ -45,8 +46,10 @@ var APP = React.createClass({
          * Then Re-join the same member after disconnect or refresh from browser.
          * */
         var member = (sessionStorage.member) ? JSON.parse(sessionStorage.member) : null;
-        if(member) {
+        if(member && member.type === 'audience') {
             this.emit('join', member);
+        } else if(member && member.type === 'speaker') {
+            this.emit('start', {name: member.name, title: sessionStorage.title});
         }
 
         console.log("Socket Connected from Client side -> Id: %s", this.socket.id);
@@ -54,7 +57,11 @@ var APP = React.createClass({
     },
     disconnect() {
         console.log("Socket Disconnected from Client side");
-        this.setState({status: 'disconnected'});
+        this.setState({
+            status: 'disconnected',
+            title: 'disconnected',
+            speaker: ''
+        });
     },
     updateState(serverState) {
         this.setState(serverState);
@@ -73,6 +80,16 @@ var APP = React.createClass({
          * Update total connected Audience
          * */
         this.setState({audience: newAudience});
+    },
+    start(presentation) {
+        /**
+         * Note: If Speaker already exists in browser sessionStorage,
+         * Then Re-join the same Speaker after disconnect or refresh from browser.
+         * */
+        if(this.state.member.type === 'speaker') {
+            sessionStorage.title = presentation.title;
+        }
+        this.setState(presentation);
     },
     /**
      * Note: ES6 shorten pattern `render: function(){}` into `render(){}`
