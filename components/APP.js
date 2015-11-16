@@ -46,9 +46,9 @@ var APP = React.createClass({
          * Then Re-join the same member after disconnect or refresh from browser.
          * */
         var member = (sessionStorage.member) ? JSON.parse(sessionStorage.member) : null;
-        if(member && member.type === 'audience') {
+        if (member && member.type === 'audience') {
             this.emit('join', member);
-        } else if(member && member.type === 'speaker') {
+        } else if (member && member.type === 'speaker') {
             this.emit('start', {name: member.name, title: sessionStorage.title});
         }
 
@@ -86,7 +86,7 @@ var APP = React.createClass({
          * Note: If Speaker already exists in browser sessionStorage,
          * Then Re-join the same Speaker after disconnect or refresh from browser.
          * */
-        if(this.state.member.type === 'speaker') {
+        if (this.state.member.type === 'speaker') {
             sessionStorage.title = presentation.title;
         }
         this.setState(presentation);

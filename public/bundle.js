@@ -31355,20 +31355,11 @@
 	                { 'if': this.props.audience.length == 0 },
 	                React.createElement(
 	                    'div',
-	                    { className: 'alert alert-danger alert-dismissible', role: 'alert' },
-	                    React.createElement(
-	                        'button',
-	                        { type: 'button', className: 'close', 'data-dismiss': 'alert', 'aria-label': 'Close' },
-	                        React.createElement(
-	                            'span',
-	                            { 'aria-hidden': 'true' },
-	                            '×'
-	                        )
-	                    ),
+	                    { className: 'alert alert-danger', role: 'alert' },
 	                    React.createElement(
 	                        'strong',
 	                        null,
-	                        'Oh snap!'
+	                        'Sorry!'
 	                    ),
 	                    ' We don\'t have any Attendance.'
 	                )

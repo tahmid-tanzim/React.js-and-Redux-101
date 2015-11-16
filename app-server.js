@@ -59,7 +59,7 @@ io.sockets.on('connection', function (socket) {
         var newMember = {
             id: this.id,
             name: payload.name,
-            type: 'member'
+            type: 'audience'
         };
 
         /**
@@ -82,12 +82,12 @@ io.sockets.on('connection', function (socket) {
         speaker = {
             id: this.id,
             name: payload.name,
-            title: payload.title,
             type: 'speaker'
         };
+        title = payload.title;
 
         this.emit('joined', speaker);
-        io.sockets.emit('start', {title: speaker.title, speaker: speaker.name});
+        io.sockets.emit('start', {title: title, speaker: speaker.name});
         console.log("Presentation started: '%s' by %s", title, speaker.name);
     });
 
