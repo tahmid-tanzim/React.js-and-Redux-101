@@ -34,6 +34,11 @@ Intern is a complete framework for testing Web sites and applications. It’s bu
 ```
 npm install --save-dev intern
 ```
+### 7. Installing [React d3](https://github.com/esbullington/react-d3)
+Modular React charts made with d3.js
+```
+npm install --save react-d3
+```
 ### Run Server
 ```
 npm start
