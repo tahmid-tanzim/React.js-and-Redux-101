@@ -31224,15 +31224,16 @@
 	        var choices = Object.keys(this.props.question);
 	        /* Discard the question from array. */
 	        choices.shift();
-	        this.setState({ choices: choices });
+	        this.setState({
+	            choices: choices,
+	            answer: sessionStorage.answer });
 	    },
 	    select: function select(choice) {
 	        this.setState({ answer: choice });
 	        sessionStorage.answer = choice;
 	        this.props.emit('answer', {
 	            question: this.props.question,
-	            choice: choice,
-	            answer: sessionStorage.answer
+	            choice: choice
 	        });
 	    },
 	    addChoiceButton: function addChoiceButton(choice, i) {

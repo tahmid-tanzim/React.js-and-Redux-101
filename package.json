@@ -15,7 +15,9 @@
     "underscore": "^1.8.3",
     "webpack": "^1.10.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "intern": "^3.0.6"
+  },
   "scripts": {
     "prestart": "webpack",
     "start": "node app-server.js"
