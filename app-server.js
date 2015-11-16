@@ -13,6 +13,12 @@ var audience = [];
 var speaker = {};
 var questions = require('./app-questions');
 var currentQuestion = false;
+var results = {
+    a: 0,
+    b: 0,
+    c: 0,
+    d: 0
+};
 
 /**
  * Note: Middleware app.use will serve everything static from public directory and bootstrap.
@@ -99,8 +105,23 @@ io.sockets.on('connection', function (socket) {
     socket.on('ask', function (question) {
         currentQuestion = question;
 
+        /* Reset results */
+        results = {
+            a: 0,
+            b: 0,
+            c: 0,
+            d: 0
+        };
         io.sockets.emit('ask', currentQuestion);
         console.log("Question Asked: '%s' by %s", question.q, speaker.name);
+    });
+
+    /**
+     * Note: Update results depending on Audience's answer.
+     * */
+    socket.on('answer', function (payload) {
+        results[payload.choice]++;
+        console.log("Answr: '%s' - %j", payload.choice, results);
     });
 
     /**

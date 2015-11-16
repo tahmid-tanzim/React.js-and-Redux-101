@@ -98,6 +98,7 @@ var APP = React.createClass({
         /**
          * Update current asked currentQuestion
          * */
+        sessionStorage.answer = '';
         this.setState({currentQuestion: question});
     },
     /**

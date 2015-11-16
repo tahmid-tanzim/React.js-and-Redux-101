@@ -15,7 +15,7 @@ var Audience = React.createClass({
                             <p>Questions will appear here.</p>
                         </Display>
                         <Display if={this.props.currentQuestion}>
-                            <Ask question={this.props.currentQuestion} />
+                            <Ask question={this.props.currentQuestion} emit={this.props.emit} />
                         </Display>
                     </Display>
                     <Display if={!this.props.member.name}>
