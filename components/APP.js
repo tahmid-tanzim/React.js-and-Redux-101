@@ -4,10 +4,16 @@ import io from 'socket.io-client'
 import Header from './parts/Header'
 var {RouteHandler} = Router;
 
-var APP = React.createClass({
-    getInitialState() {
+/**
+ * Note: ES6 Class & Properties Syntax
+ * FROM: var APP = React.createClass({});
+ * TO: class APP extends React.Component {}
+ * */
+class APP extends React.Component {
+    constructor() {
         console.log("APP Initial State");
-        return {
+        super();
+        this.state = {
             status: 'disconnected',
             title: '',
             /* Both Speaker and Audience is a member */
@@ -18,8 +24,9 @@ var APP = React.createClass({
             questions: [],
             currentQuestion: false,
             results: {}
-        }
-    },
+        };
+        this.emit = this.emit.bind(this);
+    }
     componentWillMount() {
         /**
          * Init Socket IO from client side
@@ -99,16 +106,13 @@ var APP = React.createClass({
         this.socket.on('results', data => {
             this.setState({results: data});
         });
-    },
+    }
     emit(eventName, payload) {
         /**
          * Sending emit event to `app-server.js`
          * */
         this.socket.emit(eventName, payload);
-    },
-    //updateState(serverState) {
-    //    this.setState(serverState);
-    //},
+    }
     /**
      * Note: ES6 shorten pattern `render: function(){}` into `render(){}`
      * */
@@ -120,6 +124,6 @@ var APP = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = APP;

@@ -23726,7 +23726,15 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(1);
 
@@ -23746,12 +23754,21 @@
 
 	var RouteHandler = _reactRouter2['default'].RouteHandler;
 
-	var APP = _react2['default'].createClass({
-	    displayName: 'APP',
+	/**
+	 * Note: ES6 Class & Properties Syntax
+	 * FROM: var APP = React.createClass({});
+	 * TO: class APP extends React.Component {}
+	 * */
 
-	    getInitialState: function getInitialState() {
+	var APP = (function (_React$Component) {
+	    _inherits(APP, _React$Component);
+
+	    function APP() {
+	        _classCallCheck(this, APP);
+
 	        console.log("APP Initial State");
-	        return {
+	        _get(Object.getPrototypeOf(APP.prototype), 'constructor', this).call(this);
+	        this.state = {
 	            status: 'disconnected',
 	            title: '',
 	            /* Both Speaker and Audience is a member */
@@ -23763,114 +23780,123 @@
 	            currentQuestion: false,
 	            results: {}
 	        };
-	    },
-	    componentWillMount: function componentWillMount() {
-	        var _this = this;
-
-	        /**
-	         * Init Socket IO from client side
-	         * */
-	        this.socket = (0, _socketIoClient2['default'])('http://localhost:3000');
-
-	        /**
-	         * Listening emit events from `app-server.js`
-	         * */
-	        /* ES6 Arrow Function */
-	        this.socket.on('connect', function () {
-	            /**
-	             * Note: If member (Audience) already exists in browser sessionStorage,
-	             * Then Re-join the same member after disconnect or refresh from browser.
-	             * */
-	            var member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null;
-	            if (member && member.type === 'audience') {
-	                _this.emit('join', member);
-	            } else if (member && member.type === 'speaker') {
-	                _this.emit('start', { name: member.name, title: sessionStorage.title });
-	            }
-	            console.log("Socket Connected from Client side -> Id: %s", _this.socket.id);
-	            _this.setState({ status: 'connected' });
-	        });
-
-	        this.socket.on('disconnect', function () {
-	            console.log("Socket Disconnected from Client side");
-	            _this.setState({
-	                status: 'disconnected',
-	                title: 'disconnected',
-	                speaker: ''
-	            });
-	        });
-
-	        this.socket.on('welcome', function (x) {
-	            return _this.setState(x);
-	        });
-	        this.socket.on('joined', function (member) {
-	            /**
-	             * Title: New Audience / Speaker Joined
-	             * Note: Both Speaker and Audience is a member,
-	             * Listening emit event `joined` through socket.io from `app-server.js`
-	             * */
-	            sessionStorage.member = JSON.stringify(member);
-	            _this.setState({ member: member });
-	        });
-	        this.socket.on('audience', function (newAudience) {
-	            /**
-	             * Update total connected Audience
-	             * */
-	            _this.setState({ audience: newAudience });
-	        });
-	        this.socket.on('start', function (presentation) {
-	            /**
-	             * Note: If Speaker already exists in browser sessionStorage,
-	             * Then Re-join the same Speaker after disconnect or refresh from browser.
-	             * */
-	            if (_this.state.member.type === 'speaker') {
-	                sessionStorage.title = presentation.title;
-	            }
-	            _this.setState(presentation);
-	        });
-	        this.socket.on('end', function (x) {
-	            return _this.setState(x);
-	        });
-	        this.socket.on('ask', function (question) {
-	            /**
-	             * Update current asked currentQuestion
-	             * */
-	            sessionStorage.answer = '';
-	            _this.setState({
-	                currentQuestion: question,
-	                results: {
-	                    a: 0,
-	                    b: 0,
-	                    c: 0,
-	                    d: 0
-	                }
-	            });
-	        });
-	        this.socket.on('results', function (data) {
-	            _this.setState({ results: data });
-	        });
-	    },
-	    emit: function emit(eventName, payload) {
-	        /**
-	         * Sending emit event to `app-server.js`
-	         * */
-	        this.socket.emit(eventName, payload);
-	    },
-	    //updateState(serverState) {
-	    //    this.setState(serverState);
-	    //},
-	    /**
-	     * Note: ES6 shorten pattern `render: function(){}` into `render(){}`
-	     * */
-	    render: function render() {
-	        return _react2['default'].createElement(
-	            'div',
-	            null,
-	            _react2['default'].createElement(_partsHeader2['default'], this.state),
-	            _react2['default'].createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
-	        );
+	        this.emit = this.emit.bind(this);
 	    }
-	});
+
+	    _createClass(APP, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var _this = this;
+
+	            /**
+	             * Init Socket IO from client side
+	             * */
+	            this.socket = (0, _socketIoClient2['default'])('http://localhost:3000');
+
+	            /**
+	             * Listening emit events from `app-server.js`
+	             * */
+	            /* ES6 Arrow Function */
+	            this.socket.on('connect', function () {
+	                /**
+	                 * Note: If member (Audience) already exists in browser sessionStorage,
+	                 * Then Re-join the same member after disconnect or refresh from browser.
+	                 * */
+	                var member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null;
+	                if (member && member.type === 'audience') {
+	                    _this.emit('join', member);
+	                } else if (member && member.type === 'speaker') {
+	                    _this.emit('start', { name: member.name, title: sessionStorage.title });
+	                }
+	                console.log("Socket Connected from Client side -> Id: %s", _this.socket.id);
+	                _this.setState({ status: 'connected' });
+	            });
+
+	            this.socket.on('disconnect', function () {
+	                console.log("Socket Disconnected from Client side");
+	                _this.setState({
+	                    status: 'disconnected',
+	                    title: 'disconnected',
+	                    speaker: ''
+	                });
+	            });
+
+	            this.socket.on('welcome', function (x) {
+	                return _this.setState(x);
+	            });
+	            this.socket.on('joined', function (member) {
+	                /**
+	                 * Title: New Audience / Speaker Joined
+	                 * Note: Both Speaker and Audience is a member,
+	                 * Listening emit event `joined` through socket.io from `app-server.js`
+	                 * */
+	                sessionStorage.member = JSON.stringify(member);
+	                _this.setState({ member: member });
+	            });
+	            this.socket.on('audience', function (newAudience) {
+	                /**
+	                 * Update total connected Audience
+	                 * */
+	                _this.setState({ audience: newAudience });
+	            });
+	            this.socket.on('start', function (presentation) {
+	                /**
+	                 * Note: If Speaker already exists in browser sessionStorage,
+	                 * Then Re-join the same Speaker after disconnect or refresh from browser.
+	                 * */
+	                if (_this.state.member.type === 'speaker') {
+	                    sessionStorage.title = presentation.title;
+	                }
+	                _this.setState(presentation);
+	            });
+	            this.socket.on('end', function (x) {
+	                return _this.setState(x);
+	            });
+	            this.socket.on('ask', function (question) {
+	                /**
+	                 * Update current asked currentQuestion
+	                 * */
+	                sessionStorage.answer = '';
+	                _this.setState({
+	                    currentQuestion: question,
+	                    results: {
+	                        a: 0,
+	                        b: 0,
+	                        c: 0,
+	                        d: 0
+	                    }
+	                });
+	            });
+	            this.socket.on('results', function (data) {
+	                _this.setState({ results: data });
+	            });
+	        }
+	    }, {
+	        key: 'emit',
+	        value: function emit(eventName, payload) {
+	            /**
+	             * Sending emit event to `app-server.js`
+	             * */
+	            this.socket.emit(eventName, payload);
+	        }
+
+	        /**
+	         * Note: ES6 shorten pattern `render: function(){}` into `render(){}`
+	         * */
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'div',
+	                null,
+	                _react2['default'].createElement(_partsHeader2['default'], this.state),
+	                _react2['default'].createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
+	            );
+	        }
+	    }]);
+
+	    return APP;
+	})(_react2['default'].Component);
 
 	module.exports = APP;
 
