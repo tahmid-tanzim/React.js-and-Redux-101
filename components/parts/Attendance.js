@@ -1,5 +1,5 @@
-var React = require('react');
-var Display = require('./Display');
+import React from 'react'
+import Display from './Display'
 
 var Attendance = React.createClass({
     addMemberRow(member, i) {

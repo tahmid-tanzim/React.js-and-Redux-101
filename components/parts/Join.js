@@ -1,5 +1,6 @@
-var React = require('react');
-var Link = require('react-router').Link;
+import React from 'react'
+import Router from 'react-router'
+var {Link} = Router;
 
 var Join = React.createClass({
     join() {

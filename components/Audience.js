@@ -1,7 +1,7 @@
-var React = require('react');
-var Display = require('./parts/Display');
-var Join = require('./parts/Join');
-var Ask = require('./parts/Ask');
+import React from 'react'
+import Display from './parts/Display'
+import Join from './parts/Join'
+import Ask from './parts/Ask'
 
 var Audience = React.createClass({
     render() {

@@ -1,6 +1,6 @@
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
+import React from 'react'
+import Router from 'react-router'
+var {Link} = Router;
 
 var Whoops404 = React.createClass({
     render() {

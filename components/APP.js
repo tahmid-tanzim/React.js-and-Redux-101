@@ -1,8 +1,8 @@
-var React = require('react');
-var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
-var io = require('socket.io-client');
-var Header = require('./parts/Header');
+import React from 'react'
+import Router from 'react-router'
+import io from 'socket.io-client'
+import Header from './parts/Header'
+var {RouteHandler} = Router;
 
 var APP = React.createClass({
     getInitialState() {

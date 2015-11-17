@@ -81,13 +81,12 @@
 
 	var _componentsWhoops4042 = _interopRequireDefault(_componentsWhoops404);
 
-	var Route = _reactRouter2['default'].Route;
-	var DefaultRoute = _reactRouter2['default'].DefaultRoute;
-	var NotFoundRouter = _reactRouter2['default'].NotFoundRoute;
 	/**
 	 * Note: ES6 De-structuring assignment above comment out components.
 	 * */
-	//var { Route, DefaultRoute, NotFoundRouter } = Router;
+	var Route = _reactRouter2['default'].Route;
+	var DefaultRoute = _reactRouter2['default'].DefaultRoute;
+	var NotFoundRoute = _reactRouter2['default'].NotFoundRoute;
 
 	var routes = _react2['default'].createElement(
 	    Route,
@@ -96,7 +95,7 @@
 	    _react2['default'].createElement(Route, { name: 'audience', path: 'audience', handler: _componentsAudience2['default'] }),
 	    _react2['default'].createElement(Route, { name: 'speaker', path: 'speaker', handler: _componentsSpeaker2['default'] }),
 	    _react2['default'].createElement(Route, { name: 'board', path: 'board', handler: _componentsBoard2['default'] }),
-	    _react2['default'].createElement(NotFoundRouter, { handler: _componentsWhoops4042['default'] })
+	    _react2['default'].createElement(NotFoundRoute, { handler: _componentsWhoops4042['default'] })
 	);
 
 	_reactRouter2['default'].run(routes, function (Handler) {
@@ -23727,13 +23726,27 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = __webpack_require__(1);
-	var Router = __webpack_require__(157);
-	var RouteHandler = Router.RouteHandler;
-	var io = __webpack_require__(200);
-	var Header = __webpack_require__(250);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var APP = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(157);
+
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+
+	var _socketIoClient = __webpack_require__(200);
+
+	var _socketIoClient2 = _interopRequireDefault(_socketIoClient);
+
+	var _partsHeader = __webpack_require__(250);
+
+	var _partsHeader2 = _interopRequireDefault(_partsHeader);
+
+	var RouteHandler = _reactRouter2['default'].RouteHandler;
+
+	var APP = _react2['default'].createClass({
 	    displayName: 'APP',
 
 	    getInitialState: function getInitialState() {
@@ -23755,7 +23768,7 @@
 	        /**
 	         * Init Socket IO from client side
 	         * */
-	        this.socket = io('http://localhost:3000');
+	        this.socket = (0, _socketIoClient2['default'])('http://localhost:3000');
 
 	        /**
 	         * Listening emit events from `app-server.js`
@@ -23849,11 +23862,11 @@
 	     * Note: ES6 shorten pattern `render: function(){}` into `render(){}`
 	     * */
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            null,
-	            React.createElement(Header, this.state),
-	            React.createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
+	            _react2['default'].createElement(_partsHeader2['default'], this.state),
+	            _react2['default'].createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
 	        );
 	    }
 	});
@@ -31056,13 +31069,17 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Header = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Header = _react2['default'].createClass({
 	    displayName: 'Header',
 
 	    propTypes: {
-	        title: React.PropTypes.string.isRequired
+	        title: _react2['default'].PropTypes.string.isRequired
 	    },
 	    getDefaultProps: function getDefaultProps() {
 	        return {
@@ -31070,27 +31087,27 @@
 	        };
 	    },
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'header',
 	            { className: 'row' },
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'div',
 	                { className: 'col-xs-10' },
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'h1',
 	                    null,
 	                    this.props.title
 	                ),
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'p',
 	                    null,
 	                    this.props.speaker
 	                )
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'div',
 	                { className: 'col-xs-2' },
-	                React.createElement('span', { id: 'connection-status', className: this.props.status })
+	                _react2['default'].createElement('span', { id: 'connection-status', className: this.props.status })
 	            )
 	        );
 	    }
@@ -31104,60 +31121,73 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Display = __webpack_require__(252);
-	var Join = __webpack_require__(253);
-	var Ask = __webpack_require__(254);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Audience = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _partsDisplay = __webpack_require__(252);
+
+	var _partsDisplay2 = _interopRequireDefault(_partsDisplay);
+
+	var _partsJoin = __webpack_require__(253);
+
+	var _partsJoin2 = _interopRequireDefault(_partsJoin);
+
+	var _partsAsk = __webpack_require__(254);
+
+	var _partsAsk2 = _interopRequireDefault(_partsAsk);
+
+	var Audience = _react2['default'].createClass({
 	    displayName: 'Audience',
 
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            null,
-	            React.createElement(
-	                Display,
+	            _react2['default'].createElement(
+	                _partsDisplay2['default'],
 	                { 'if': this.props.status === 'connected' },
-	                React.createElement(
-	                    Display,
+	                _react2['default'].createElement(
+	                    _partsDisplay2['default'],
 	                    { 'if': this.props.member.name },
-	                    React.createElement(
+	                    _react2['default'].createElement(
 	                        'h2',
 	                        null,
 	                        'Welcome ',
 	                        this.props.member.name
 	                    ),
-	                    React.createElement(
-	                        Display,
+	                    _react2['default'].createElement(
+	                        _partsDisplay2['default'],
 	                        { 'if': !this.props.currentQuestion },
-	                        React.createElement(
+	                        _react2['default'].createElement(
 	                            'p',
 	                            null,
 	                            this.props.audience.length,
 	                            ' audience members connected.'
 	                        ),
-	                        React.createElement(
+	                        _react2['default'].createElement(
 	                            'p',
 	                            null,
 	                            'Questions will appear here.'
 	                        )
 	                    ),
-	                    React.createElement(
-	                        Display,
+	                    _react2['default'].createElement(
+	                        _partsDisplay2['default'],
 	                        { 'if': this.props.currentQuestion },
-	                        React.createElement(Ask, { question: this.props.currentQuestion, emit: this.props.emit })
+	                        _react2['default'].createElement(_partsAsk2['default'], { question: this.props.currentQuestion, emit: this.props.emit })
 	                    )
 	                ),
-	                React.createElement(
-	                    Display,
+	                _react2['default'].createElement(
+	                    _partsDisplay2['default'],
 	                    { 'if': !this.props.member.name },
-	                    React.createElement(
+	                    _react2['default'].createElement(
 	                        'h2',
 	                        null,
 	                        'Join the session'
 	                    ),
-	                    React.createElement(Join, { emit: this.props.emit })
+	                    _react2['default'].createElement(_partsJoin2['default'], { emit: this.props.emit })
 	                )
 	            )
 	        );
@@ -31172,13 +31202,17 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Display = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Display = _react2['default'].createClass({
 	    displayName: 'Display',
 
 	    render: function render() {
-	        return this.props['if'] ? React.createElement(
+	        return this.props['if'] ? _react2['default'].createElement(
 	            'div',
 	            null,
 	            this.props.children
@@ -31194,15 +31228,24 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Link = __webpack_require__(157).Link;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Join = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(157);
+
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+
+	var Link = _reactRouter2['default'].Link;
+
+	var Join = _react2['default'].createClass({
 	    displayName: 'Join',
 
 	    join: function join() {
 	        var member = {
-	            name: React.findDOMNode(this.refs.name).value
+	            name: _react2['default'].findDOMNode(this.refs.name).value
 	        };
 	        console.log("TODO: Join Member " + member.name);
 	        /**
@@ -31212,29 +31255,29 @@
 	        this.props.emit('join', member);
 	    },
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'form',
 	            { action: 'javascript:void(0)', onSubmit: this.join },
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'label',
 	                null,
 	                'Full Name'
 	            ),
-	            React.createElement('input', { ref: 'name',
+	            _react2['default'].createElement('input', { ref: 'name',
 	                className: 'form-control',
 	                placeholder: 'enter your full name',
 	                required: true }),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'button',
 	                { className: 'btn btn-primary' },
 	                'Join'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                Link,
 	                { to: '/speaker' },
 	                'Join as speaker'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                Link,
 	                { to: '/board' },
 	                'Go to Board'
@@ -31251,10 +31294,17 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Display = __webpack_require__(252);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Ask = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Display = __webpack_require__(252);
+
+	var _Display2 = _interopRequireDefault(_Display);
+
+	var Ask = _react2['default'].createClass({
 	    displayName: 'Ask',
 
 	    getInitialState: function getInitialState() {
@@ -31287,7 +31337,7 @@
 	    },
 	    addChoiceButton: function addChoiceButton(choice, i) {
 	        var buttonTypes = ['success', 'info', 'warning', 'danger', 'primary', 'default'];
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'button',
 	            { key: i,
 	                className: "col-xs-12 col-sm-6 btn btn-" + buttonTypes[i],
@@ -31298,33 +31348,33 @@
 	        );
 	    },
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { id: 'currentQuestion' },
-	            React.createElement(
-	                Display,
+	            _react2['default'].createElement(
+	                _Display2['default'],
 	                { 'if': this.state.answer },
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'h3',
 	                    null,
 	                    'You answered: ',
 	                    this.state.answer
 	                ),
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'p',
 	                    null,
 	                    this.props.question[this.state.answer]
 	                )
 	            ),
-	            React.createElement(
-	                Display,
+	            _react2['default'].createElement(
+	                _Display2['default'],
 	                { 'if': !this.state.answer },
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'h3',
 	                    null,
 	                    this.props.question.q
 	                ),
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'div',
 	                    { className: 'row' },
 	                    this.state.choices.map(this.addChoiceButton)
@@ -31342,42 +31392,58 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Display = __webpack_require__(252);
-	var JoinSpeaker = __webpack_require__(256);
-	var Attendance = __webpack_require__(257);
-	var Questions = __webpack_require__(258);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Speaker = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _partsDisplay = __webpack_require__(252);
+
+	var _partsDisplay2 = _interopRequireDefault(_partsDisplay);
+
+	var _partsJoinSpeaker = __webpack_require__(256);
+
+	var _partsJoinSpeaker2 = _interopRequireDefault(_partsJoinSpeaker);
+
+	var _partsAttendance = __webpack_require__(257);
+
+	var _partsAttendance2 = _interopRequireDefault(_partsAttendance);
+
+	var _partsQuestions = __webpack_require__(258);
+
+	var _partsQuestions2 = _interopRequireDefault(_partsQuestions);
+
+	var Speaker = _react2['default'].createClass({
 	    displayName: 'Speaker',
 
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            null,
-	            React.createElement(
-	                Display,
+	            _react2['default'].createElement(
+	                _partsDisplay2['default'],
 	                { 'if': this.props.status === 'connected' },
-	                React.createElement(
-	                    Display,
+	                _react2['default'].createElement(
+	                    _partsDisplay2['default'],
 	                    { 'if': this.props.member.name && this.props.member.type === 'speaker' },
-	                    React.createElement(
+	                    _react2['default'].createElement(
 	                        'h2',
 	                        null,
 	                        'Speaker Panel'
 	                    ),
-	                    React.createElement(Questions, { questions: this.props.questions, emit: this.props.emit }),
-	                    React.createElement(Attendance, { audience: this.props.audience })
+	                    _react2['default'].createElement(_partsQuestions2['default'], { questions: this.props.questions, emit: this.props.emit }),
+	                    _react2['default'].createElement(_partsAttendance2['default'], { audience: this.props.audience })
 	                ),
-	                React.createElement(
-	                    Display,
+	                _react2['default'].createElement(
+	                    _partsDisplay2['default'],
 	                    { 'if': !this.props.member.name },
-	                    React.createElement(
+	                    _react2['default'].createElement(
 	                        'h2',
 	                        null,
 	                        'Start the presentation'
 	                    ),
-	                    React.createElement(JoinSpeaker, { emit: this.props.emit })
+	                    _react2['default'].createElement(_partsJoinSpeaker2['default'], { emit: this.props.emit })
 	                )
 	            )
 	        );
@@ -31392,42 +31458,46 @@
 
 	"use strict";
 
-	var React = __webpack_require__(1);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-	var JoinSpeaker = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var JoinSpeaker = _react2["default"].createClass({
 	    displayName: "JoinSpeaker",
 
 	    start: function start() {
 	        var speaker = {
-	            name: React.findDOMNode(this.refs.name).value,
-	            title: React.findDOMNode(this.refs.title).value
+	            name: _react2["default"].findDOMNode(this.refs.name).value,
+	            title: _react2["default"].findDOMNode(this.refs.title).value
 	        };
 	        console.log("TODO: Speaker: " + speaker.name + " | " + speaker.title);
 	        this.props.emit('start', speaker);
 	    },
 	    render: function render() {
-	        return React.createElement(
+	        return _react2["default"].createElement(
 	            "form",
 	            { action: "javascript:void(0)", onSubmit: this.start },
-	            React.createElement(
+	            _react2["default"].createElement(
 	                "label",
 	                null,
 	                "Full Name"
 	            ),
-	            React.createElement("input", { ref: "name",
+	            _react2["default"].createElement("input", { ref: "name",
 	                className: "form-control",
 	                placeholder: "enter your full name",
 	                required: true }),
-	            React.createElement(
+	            _react2["default"].createElement(
 	                "label",
 	                null,
 	                "Presentation Title"
 	            ),
-	            React.createElement("input", { ref: "title",
+	            _react2["default"].createElement("input", { ref: "title",
 	                className: "form-control",
 	                placeholder: "enter a title for this presentation",
 	                required: true }),
-	            React.createElement(
+	            _react2["default"].createElement(
 	                "button",
 	                { className: "btn btn-primary" },
 	                "Join"
@@ -31444,22 +31514,29 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Display = __webpack_require__(252);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Attendance = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Display = __webpack_require__(252);
+
+	var _Display2 = _interopRequireDefault(_Display);
+
+	var Attendance = _react2['default'].createClass({
 	    displayName: 'Attendance',
 
 	    addMemberRow: function addMemberRow(member, i) {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'tr',
 	            { key: i },
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'td',
 	                null,
 	                member.name
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'td',
 	                null,
 	                member.id
@@ -31467,54 +31544,54 @@
 	        );
 	    },
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            null,
-	            React.createElement(
-	                Display,
+	            _react2['default'].createElement(
+	                _Display2['default'],
 	                { 'if': this.props.audience.length > 0 },
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'h2',
 	                    null,
 	                    'Attendance - ',
 	                    this.props.audience.length,
 	                    ' members'
 	                ),
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'table',
 	                    { className: 'table table-striped' },
-	                    React.createElement(
+	                    _react2['default'].createElement(
 	                        'thead',
 	                        null,
-	                        React.createElement(
+	                        _react2['default'].createElement(
 	                            'tr',
 	                            null,
-	                            React.createElement(
+	                            _react2['default'].createElement(
 	                                'th',
 	                                null,
 	                                'Audience Member'
 	                            ),
-	                            React.createElement(
+	                            _react2['default'].createElement(
 	                                'th',
 	                                null,
 	                                'Socket ID'
 	                            )
 	                        )
 	                    ),
-	                    React.createElement(
+	                    _react2['default'].createElement(
 	                        'tbody',
 	                        null,
 	                        this.props.audience.map(this.addMemberRow)
 	                    )
 	                )
 	            ),
-	            React.createElement(
-	                Display,
+	            _react2['default'].createElement(
+	                _Display2['default'],
 	                { 'if': this.props.audience.length == 0 },
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'div',
 	                    { className: 'alert alert-danger', role: 'alert' },
-	                    React.createElement(
+	                    _react2['default'].createElement(
 	                        'strong',
 	                        null,
 	                        'Sorry!'
@@ -31534,19 +31611,23 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Questions = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var Questions = _react2['default'].createClass({
 	    displayName: 'Questions',
 
 	    ask: function ask(question) {
 	        this.props.emit('ask', question);
 	    },
 	    addQuestion: function addQuestion(question, i) {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { key: i, className: 'col-xs-12 col-sm-6 col-md-3' },
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'span',
 	                { onClick: this.ask.bind(null, question) },
 	                question.q
@@ -31554,10 +31635,10 @@
 	        );
 	    },
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { id: 'questions', className: 'row' },
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'h2',
 	                null,
 	                'Questions'
@@ -31575,11 +31656,23 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Display = __webpack_require__(252);
-	var BarChart = __webpack_require__(260).BarChart;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Board = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _partsDisplay = __webpack_require__(252);
+
+	var _partsDisplay2 = _interopRequireDefault(_partsDisplay);
+
+	var _reactD3 = __webpack_require__(260);
+
+	var _reactD32 = _interopRequireDefault(_reactD3);
+
+	var BarChart = _reactD32['default'].BarChart;
+
+	var Board = _react2['default'].createClass({
 	    displayName: 'Board',
 
 	    barGraphData: function barGraphData(results) {
@@ -31591,21 +31684,21 @@
 	        });
 	    },
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { id: 'scoreboard' },
-	            React.createElement(
-	                Display,
+	            _react2['default'].createElement(
+	                _partsDisplay2['default'],
 	                { 'if': this.props.status === 'connected' && this.props.currentQuestion },
-	                React.createElement(BarChart, { data: this.barGraphData(this.props.results),
+	                _react2['default'].createElement(BarChart, { data: this.barGraphData(this.props.results),
 	                    title: this.props.currentQuestion.q,
 	                    height: window.innerHeight * 0.6,
 	                    width: window.innerWidth * 0.9 })
 	            ),
-	            React.createElement(
-	                Display,
+	            _react2['default'].createElement(
+	                _partsDisplay2['default'],
 	                { 'if': this.props.status === 'connected' && !this.props.currentQuestion },
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'h3',
 	                    null,
 	                    'Awaiting a Question...'
@@ -50258,38 +50351,46 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Router = __webpack_require__(157);
-	var Link = Router.Link;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var Whoops404 = React.createClass({
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(157);
+
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+
+	var Link = _reactRouter2['default'].Link;
+
+	var Whoops404 = _react2['default'].createClass({
 	    displayName: 'Whoops404',
 
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { id: 'not-found' },
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'h2',
 	                null,
 	                'Whoops...'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                'p',
 	                null,
 	                'Sorry! The page is not available. Are you looking for:'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                Link,
 	                { to: '/' },
 	                'Join as Audience'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                Link,
 	                { to: '/speaker' },
 	                'Start the Presentation'
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                Link,
 	                { to: '/board' },
 	                'View the Board'
