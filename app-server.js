@@ -21,9 +21,9 @@ var results = {
 };
 
 /**
- * Note: Middleware app.use will serve everything static from public directory and bootstrap.
+ * Note: Middleware app.use will serve everything static from dist directory and bootstrap.
  * */
-app.use(express.static('./public'));
+app.use(express.static('./dist'));
 app.use(express.static('./node_modules/bootstrap/dist'));
 
 var server = app.listen(3000);
