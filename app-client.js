@@ -1,5 +1,5 @@
 /**
- * Note: ES6 syntax conversion
+ * Note: ES6 `import` syntax conversion
  * From: var React = required('react');
  * To: import React from 'react'
  * */

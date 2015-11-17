@@ -3,7 +3,12 @@ import Display from './parts/Display'
 import Join from './parts/Join'
 import Ask from './parts/Ask'
 
-var Audience = React.createClass({
+/**
+ * Note: ES6 Class Syntax
+ * FROM: var Audience = React.createClass({});
+ * TO: class Audience extends React.Component {}
+ * */
+class Audience extends React.Component {
     render() {
         return (
             <div>
@@ -26,6 +31,6 @@ var Audience = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = Audience;

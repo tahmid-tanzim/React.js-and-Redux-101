@@ -45,7 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Note: ES6 syntax conversion
+	 * Note: ES6 `import` syntax conversion
 	 * From: var React = required('react');
 	 * To: import React from 'react'
 	 * */
@@ -31121,7 +31121,15 @@
 
 	'use strict';
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(1);
 
@@ -31139,60 +31147,77 @@
 
 	var _partsAsk2 = _interopRequireDefault(_partsAsk);
 
-	var Audience = _react2['default'].createClass({
-	    displayName: 'Audience',
+	/**
+	 * Note: ES6 Class Syntax
+	 * FROM: var Audience = React.createClass({});
+	 * TO: class Audience extends React.Component {}
+	 * */
 
-	    render: function render() {
-	        return _react2['default'].createElement(
-	            'div',
-	            null,
-	            _react2['default'].createElement(
-	                _partsDisplay2['default'],
-	                { 'if': this.props.status === 'connected' },
+	var Audience = (function (_React$Component) {
+	    _inherits(Audience, _React$Component);
+
+	    function Audience() {
+	        _classCallCheck(this, Audience);
+
+	        _get(Object.getPrototypeOf(Audience.prototype), 'constructor', this).apply(this, arguments);
+	    }
+
+	    _createClass(Audience, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'div',
+	                null,
 	                _react2['default'].createElement(
 	                    _partsDisplay2['default'],
-	                    { 'if': this.props.member.name },
-	                    _react2['default'].createElement(
-	                        'h2',
-	                        null,
-	                        'Welcome ',
-	                        this.props.member.name
-	                    ),
+	                    { 'if': this.props.status === 'connected' },
 	                    _react2['default'].createElement(
 	                        _partsDisplay2['default'],
-	                        { 'if': !this.props.currentQuestion },
+	                        { 'if': this.props.member.name },
 	                        _react2['default'].createElement(
-	                            'p',
+	                            'h2',
 	                            null,
-	                            this.props.audience.length,
-	                            ' audience members connected.'
+	                            'Welcome ',
+	                            this.props.member.name
 	                        ),
 	                        _react2['default'].createElement(
-	                            'p',
-	                            null,
-	                            'Questions will appear here.'
+	                            _partsDisplay2['default'],
+	                            { 'if': !this.props.currentQuestion },
+	                            _react2['default'].createElement(
+	                                'p',
+	                                null,
+	                                this.props.audience.length,
+	                                ' audience members connected.'
+	                            ),
+	                            _react2['default'].createElement(
+	                                'p',
+	                                null,
+	                                'Questions will appear here.'
+	                            )
+	                        ),
+	                        _react2['default'].createElement(
+	                            _partsDisplay2['default'],
+	                            { 'if': this.props.currentQuestion },
+	                            _react2['default'].createElement(_partsAsk2['default'], { question: this.props.currentQuestion, emit: this.props.emit })
 	                        )
 	                    ),
 	                    _react2['default'].createElement(
 	                        _partsDisplay2['default'],
-	                        { 'if': this.props.currentQuestion },
-	                        _react2['default'].createElement(_partsAsk2['default'], { question: this.props.currentQuestion, emit: this.props.emit })
+	                        { 'if': !this.props.member.name },
+	                        _react2['default'].createElement(
+	                            'h2',
+	                            null,
+	                            'Join the session'
+	                        ),
+	                        _react2['default'].createElement(_partsJoin2['default'], { emit: this.props.emit })
 	                    )
-	                ),
-	                _react2['default'].createElement(
-	                    _partsDisplay2['default'],
-	                    { 'if': !this.props.member.name },
-	                    _react2['default'].createElement(
-	                        'h2',
-	                        null,
-	                        'Join the session'
-	                    ),
-	                    _react2['default'].createElement(_partsJoin2['default'], { emit: this.props.emit })
 	                )
-	            )
-	        );
-	    }
-	});
+	            );
+	        }
+	    }]);
+
+	    return Audience;
+	})(_react2['default'].Component);
 
 	module.exports = Audience;
 
@@ -31392,7 +31417,15 @@
 
 	'use strict';
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(1);
 
@@ -31414,41 +31447,58 @@
 
 	var _partsQuestions2 = _interopRequireDefault(_partsQuestions);
 
-	var Speaker = _react2['default'].createClass({
-	    displayName: 'Speaker',
+	/**
+	 * Note: ES6 Class Syntax
+	 * FROM: var Speaker = React.createClass({});
+	 * TO: class Speaker extends React.Component {}
+	 * */
 
-	    render: function render() {
-	        return _react2['default'].createElement(
-	            'div',
-	            null,
-	            _react2['default'].createElement(
-	                _partsDisplay2['default'],
-	                { 'if': this.props.status === 'connected' },
-	                _react2['default'].createElement(
-	                    _partsDisplay2['default'],
-	                    { 'if': this.props.member.name && this.props.member.type === 'speaker' },
-	                    _react2['default'].createElement(
-	                        'h2',
-	                        null,
-	                        'Speaker Panel'
-	                    ),
-	                    _react2['default'].createElement(_partsQuestions2['default'], { questions: this.props.questions, emit: this.props.emit }),
-	                    _react2['default'].createElement(_partsAttendance2['default'], { audience: this.props.audience })
-	                ),
-	                _react2['default'].createElement(
-	                    _partsDisplay2['default'],
-	                    { 'if': !this.props.member.name },
-	                    _react2['default'].createElement(
-	                        'h2',
-	                        null,
-	                        'Start the presentation'
-	                    ),
-	                    _react2['default'].createElement(_partsJoinSpeaker2['default'], { emit: this.props.emit })
-	                )
-	            )
-	        );
+	var Speaker = (function (_React$Component) {
+	    _inherits(Speaker, _React$Component);
+
+	    function Speaker() {
+	        _classCallCheck(this, Speaker);
+
+	        _get(Object.getPrototypeOf(Speaker.prototype), 'constructor', this).apply(this, arguments);
 	    }
-	});
+
+	    _createClass(Speaker, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'div',
+	                null,
+	                _react2['default'].createElement(
+	                    _partsDisplay2['default'],
+	                    { 'if': this.props.status === 'connected' },
+	                    _react2['default'].createElement(
+	                        _partsDisplay2['default'],
+	                        { 'if': this.props.member.name && this.props.member.type === 'speaker' },
+	                        _react2['default'].createElement(
+	                            'h2',
+	                            null,
+	                            'Speaker Panel'
+	                        ),
+	                        _react2['default'].createElement(_partsQuestions2['default'], { questions: this.props.questions, emit: this.props.emit }),
+	                        _react2['default'].createElement(_partsAttendance2['default'], { audience: this.props.audience })
+	                    ),
+	                    _react2['default'].createElement(
+	                        _partsDisplay2['default'],
+	                        { 'if': !this.props.member.name },
+	                        _react2['default'].createElement(
+	                            'h2',
+	                            null,
+	                            'Start the presentation'
+	                        ),
+	                        _react2['default'].createElement(_partsJoinSpeaker2['default'], { emit: this.props.emit })
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Speaker;
+	})(_react2['default'].Component);
 
 	module.exports = Speaker;
 
@@ -50351,7 +50401,15 @@
 
 	'use strict';
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(1);
 
@@ -50363,41 +50421,58 @@
 
 	var Link = _reactRouter2['default'].Link;
 
-	var Whoops404 = _react2['default'].createClass({
-	    displayName: 'Whoops404',
+	/**
+	 * Note: ES6 Class Syntax
+	 * FROM: var Whoops404 = React.createClass({});
+	 * TO: class Whoops404 extends React.Component {}
+	 * */
 
-	    render: function render() {
-	        return _react2['default'].createElement(
-	            'div',
-	            { id: 'not-found' },
-	            _react2['default'].createElement(
-	                'h2',
-	                null,
-	                'Whoops...'
-	            ),
-	            _react2['default'].createElement(
-	                'p',
-	                null,
-	                'Sorry! The page is not available. Are you looking for:'
-	            ),
-	            _react2['default'].createElement(
-	                Link,
-	                { to: '/' },
-	                'Join as Audience'
-	            ),
-	            _react2['default'].createElement(
-	                Link,
-	                { to: '/speaker' },
-	                'Start the Presentation'
-	            ),
-	            _react2['default'].createElement(
-	                Link,
-	                { to: '/board' },
-	                'View the Board'
-	            )
-	        );
+	var Whoops404 = (function (_React$Component) {
+	    _inherits(Whoops404, _React$Component);
+
+	    function Whoops404() {
+	        _classCallCheck(this, Whoops404);
+
+	        _get(Object.getPrototypeOf(Whoops404.prototype), 'constructor', this).apply(this, arguments);
 	    }
-	});
+
+	    _createClass(Whoops404, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'div',
+	                { id: 'not-found' },
+	                _react2['default'].createElement(
+	                    'h2',
+	                    null,
+	                    'Whoops...'
+	                ),
+	                _react2['default'].createElement(
+	                    'p',
+	                    null,
+	                    'Sorry! The page is not available. Are you looking for:'
+	                ),
+	                _react2['default'].createElement(
+	                    Link,
+	                    { to: '/' },
+	                    'Join as Audience'
+	                ),
+	                _react2['default'].createElement(
+	                    Link,
+	                    { to: '/speaker' },
+	                    'Start the Presentation'
+	                ),
+	                _react2['default'].createElement(
+	                    Link,
+	                    { to: '/board' },
+	                    'View the Board'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Whoops404;
+	})(_react2['default'].Component);
 
 	module.exports = Whoops404;
 

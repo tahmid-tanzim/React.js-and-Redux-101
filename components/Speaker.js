@@ -4,7 +4,12 @@ import JoinSpeaker from './parts/JoinSpeaker'
 import Attendance from './parts/Attendance'
 import Questions from './parts/Questions'
 
-var Speaker = React.createClass({
+/**
+ * Note: ES6 Class Syntax
+ * FROM: var Speaker = React.createClass({});
+ * TO: class Speaker extends React.Component {}
+ * */
+class Speaker extends React.Component {
     render() {
         return (
             <div>
@@ -22,6 +27,6 @@ var Speaker = React.createClass({
             </div>
         );
     }
-});
+}
 
 module.exports = Speaker;
