@@ -1,14 +1,10 @@
 import React from 'react'
-
-var Header = React.createClass({
-    propTypes: {
-        title: React.PropTypes.string.isRequired
-    },
-    getDefaultProps() {
-        return {
-            status: 'disconnected'
-        }
-    },
+/**
+ * Note: ES6 Class & Properties Syntax
+ * FROM: var Header = React.createClass({});
+ * TO: class Header extends React.Component {}
+ * */
+class Header extends React.Component {
     render() {
         return (
             <header className="row">
@@ -22,6 +18,14 @@ var Header = React.createClass({
             </header>
         );
     }
-});
+}
+
+Header.propTypes = {
+    title: React.PropTypes.string.isRequired
+};
+
+Header.defaultProps = {
+    status: 'disconnected'
+};
 
 module.exports = Header;
