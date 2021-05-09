@@ -6,20 +6,18 @@
   "dependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.2",
-    "bootstrap": "^3.3.5",
-    "express": "^4.13.1",
+    "bootstrap": "^5.0.0",
+    "express": "^4.17.1",
+    "intern": "^4.9.0",
     "react": "^17.0.2",
-    "react-d3": "^0.3.1",
+    "react-d3": "^0.4.0",
     "react-router": "^5.2.0",
     "socket.io": "^4.0.2",
     "socket.io-client": "^4.0.2",
-    "underscore": "^1.8.3",
-    "webpack": "^5.36.2",
-    "handlebars": ">=4.7.7"
+    "underscore": "^1.13.1",
+    "webpack": "^5.36.2"
   },
-  "devDependencies": {
-    "intern": "^4.9.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "prestart": "webpack",
     "start": "node app-server.js"
