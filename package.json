@@ -15,7 +15,8 @@
     "socket.io": "^4.0.2",
     "socket.io-client": "^4.0.2",
     "underscore": "^1.13.1",
-    "webpack": "^5.36.2"
+    "webpack": "^5.36.2",
+    "handlebars": ">=4.7.7"
   },
   "devDependencies": {},
   "scripts": {
