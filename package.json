@@ -18,6 +18,9 @@
     "underscore": "^1.13.1",
     "webpack": "^5.50.0"
   },
+  "devDependencies": {
+    "jszip": ">=3.7.0"
+  },
   "scripts": {
     "prestart": "webpack",
     "start": "node app-server.js"
