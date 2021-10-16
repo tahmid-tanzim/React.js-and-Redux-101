@@ -4,6 +4,7 @@
   "description": "An app that allows speakers to poll audience members",
   "main": "app-server.js",
   "dependencies": {
+    "axios": ">=0.21.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.2",
     "bootstrap": "^5.1.0",
